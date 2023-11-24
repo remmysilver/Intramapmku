@@ -20,60 +20,85 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
 // Added live location
  var lc = L.control.locate().addTo(map);
  lc.start();
+ function createCustomIcon(label) {
+	return L.divIcon({
+	  className: 'custom-icon',
+	  html: `<div style = "color: red; font-weight: bold;">${label}</div>`,
+	});
+  }
+  
+  // Define building names and their corresponding coordinates
+  var buildings = [
+	{ label: 'ALUMNI PLAZA', coordinates: [-1.0468652041580178, 37.08547070384408] },
+	{ label: 'FLT', coordinates: [-1.0451113317843883, 37.08455875278159] },
+	{ label: 'BL5', coordinates: [-1.046302034239734, 37.085122016674404] },
+	{ label: 'LT', coordinates: [-1.04643,37.08536] },
+	{ label: 'LIBRARY', coordinates: [-1.04613,37.08542] },
+	{ label: 'PARKING SPOT', coordinates: [-1.04560,37.08525] },
+	{ label: 'BASKETBALL COURT', coordinates: [-1.04593,37.08476] },
+	{ label: 'MAIN GATE', coordinates: [-1.04703,37.08598] },
+	{ label: 'LADIES HOSTEL', coordinates: [-1.04640,37.08471] },
+	{ label: 'MLT', coordinates: [-1.04570,37.08506] },
+	{ label: 'BOOKSHOP', coordinates: [-1.04712,37.08572] },
+	{ label: 'PARKING SPOT', coordinates: [-1.04709,37.08530] },
+	,
+	// Add more buildings as needed
+  ];
+  
+  // Add custom icons for each building
+  buildings.forEach(function (building) {
+	L.marker(building.coordinates, { icon: createCustomIcon(building.label) }).addTo(map);
+  });
 //  Option to start or stop at will
 //  lc.stopFollowing()
 // marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
-var popup1 = L.popup()
+var popup1 = L.popup({ autoClose: false })
     .setLatLng([-1.0468652041580178, 37.08547070384408])
     .setContent("ALUMNI PLAZA");
     // .openOn(map);
-var popup2 = L.popup()
+var popup2 = L.popup({ autoClose: false })
     .setLatLng([-1.0451113317843883, 37.08455875278159])
     .setContent("FLT");
     // .openOn(map);
-var popup3 = L.popup()
+var popup3 = L.popup({ autoClose: false })
     .setLatLng([-1.046302034239734, 37.085122016674404])
     .setContent("BL5");
     // .openOn(map);
-var popup4 = L.popup()
+var popup4 = L.popup({ autoClose: false })
     .setLatLng([-1.04643,37.08536])
     .setContent("LT");
-var popup5 = L.popup()
+var popup5 = L.popup({ autoClose: false })
     .setLatLng([-1.04613,37.08542])
     .setContent("LIBRARY");
-var popup6 = L.popup()
+var popup6 = L.popup({ autoClose: false })
     .setLatLng([-1.04560,37.08525])
     .setContent("PARKING SPOT");
-var popup7 = L.popup()
+var popup7 = L.popup({ autoClose: false })
     .setLatLng([-1.04593,37.08476])
     .setContent("BASKETBALL COURT");
-var popup8 = L.popup()
+var popup8 = L.popup({ autoClose: false })
     .setLatLng([-1.04703,37.08598])
     .setContent("MAIN GATE");
-var popup9 = L.popup()
+var popup9 = L.popup({ autoClose: false })
     .setLatLng([-1.04640,37.08471])
     .setContent("LADIES HOSTEL");
-var popup10 = L.popup()
+var popup10 = L.popup({ autoClose: false })
     .setLatLng([-1.04570,37.08506])
     .setContent("MLT");
-var popup11 = L.popup()
+var popup11 = L.popup({ autoClose: false })
     .setLatLng([-1.04712,37.08572])
     .setContent("BOOKSHOP");
-var popup12 = L.popup()
+var popup12 = L.popup({ autoClose: false })
     .setLatLng([-1.04709,37.08530])
     .setContent("PARKING SPOT");
-popup1.addTo(map);
-popup2.addTo(map);
-popup3.addTo(map);
-popup4.addTo(map);
-popup5.addTo(map);
-popup6.addTo(map);
-popup7.addTo(map);
-popup8.addTo(map);
-popup9.addTo(map);
-popup10.addTo(map);
-popup11.addTo(map);
-popup12.addTo(map);
+var popups = [popup1, popup2, popup3, popup4, popup5, popup6, popup7, popup8, popup9, popup10, popup11, popup12];
+
+popups.forEach(function (popup) {
+	popup.addTo(map);
+	popup._container.addEventListener('click', function () {
+		L.DomEvent.stopPropagation(event);
+	  });
+	});
 
 
 	// create a red polyline from an array of LatLng points
