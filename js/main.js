@@ -22,10 +22,10 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
   drawCircle: false,
   //circleStyle: {
     //color: 'blue',
-    /fillColor: 'blue',
+    //fillColor: 'blue',
     //fillOpacity: 0.3,
   },
-}).addTo(map);
+).addTo(map);
  lc.start();
  function createCustomIcon(label) {
 	return L.divIcon({
