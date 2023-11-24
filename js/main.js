@@ -19,11 +19,11 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
 
 // Added live location
  var lc = L.control.locate({
-  drawCircle: true,
-  circleStyle: {
-    color: 'blue',
-    fillColor: 'blue',
-    fillOpacity: 0.3,
+  drawCircle: false,
+  //circleStyle: {
+    //color: 'blue',
+    /fillColor: 'blue',
+    //fillOpacity: 0.3,
   },
 }).addTo(map);
  lc.start();
