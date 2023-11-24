@@ -18,7 +18,14 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
 }).addTo(map);
 
 // Added live location
- var lc = L.control.locate().addTo(map);
+ var lc = L.control.locate({
+  drawCircle: true,
+  circleStyle: {
+    color: 'blue',
+    fillColor: 'blue',
+    fillOpacity: 0.3,
+  },
+}).addTo(map);
  lc.start();
  function createCustomIcon(label) {
 	return L.divIcon({
